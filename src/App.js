@@ -1,5 +1,6 @@
 import { useState } from "react"
 import { useEffect } from "react"
+import MostrarLaberinto from "./Components/Laberinto"
 
 //Laberinto
 const GetMaze = async (ancho, alto) => {
@@ -15,12 +16,14 @@ const GetMaze = async (ancho, alto) => {
 
 //Aplicación
 const App = () => {
+    const [LABERINTO, setLABERINTO] = useState(null)
     const [inicio, setInicio] = useState(true)
     const [altura, setAltura] = useState(4)
     const [ancho, setAncho] = useState(4)
 
     const handleClick = () => {
         setInicio(false)
+        NuevoLab()
     }
 
     //get valores
@@ -32,6 +35,15 @@ const App = () => {
     const getAncho = (cant) => {
         const anch = Number(anch.target.value)
         setAncho(anch)
+    }
+
+    const NuevoLab = async () => {
+        const NM = await GetMaze(ancho, altura)
+        setLABERINTO(NM)
+    }
+
+    const LABF = async (MN) => {
+        setLABERINTO(MN)
     }
 
     const Cuadro = () => {
@@ -61,7 +73,7 @@ const App = () => {
                 <h1>Imaginen que aparece un laberinto xd</h1>
                 <div className="contenedor-laberinto">
                     <p>altura = {altura} y ancho = {ancho}</p>
-                    
+                    {LABERINTO && <MostrarLaberinto laberinto={LABERINTO} altura={altura} ancho={ancho} turno={LABF} />}
                 </div>
             </div>
         )
