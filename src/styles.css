@@ -1,5 +1,5 @@
 body {
-    background: blue;
+    background: rgb(62, 62, 114);
     display: grid;
     place-content: center;
     min-height: 100vh;
