@@ -33,7 +33,7 @@ const App = () => {
     }
 
     const getAncho = (cant) => {
-        const anch = Number(anch.target.value)
+        const anch = Number(cant.target.value)
         setAncho(anch)
     }
 
@@ -46,17 +46,20 @@ const App = () => {
         setLABERINTO(MN)
     }
 
+
     const Cuadro = () => {
         return (
             <form className="contenedor">
-                <div>
+                <div className="titulo">
                     <h1>Laberinto</h1>
                 </div>
-                <div>
+                <div className="inputs-wh">
                     <input id="altura" type="number" min={3} max={15} defaultValue={4} onChange={getAltura}/>
-                    <input id="ancho" type="number" min={3} max={15} defaultValue={4} onChange={getAncho}/>
-                    <button onClick={handleClick}>
-                        Comenzar juego
+                    <input id="ancho" type="number" min={4} max={4} defaultValue={4} onChange={getAncho}/>
+                </div>
+                <div className="boton">
+                <button onClick={handleClick}>
+                        Start
                     </button>
                 </div>
                     
@@ -66,13 +69,15 @@ const App = () => {
     
 
     const Laberinto = () => {
-
-
         return(
-            <div>
-                <h1>Imaginen que aparece un laberinto xd</h1>
+            <div className="all">
+                <div className="contenedor2">
+                    <h1>Laberintoooo</h1>
+                </div>
+                
                 <div className="contenedor-laberinto">
-                    <p>altura = {altura} y ancho = {ancho}</p>
+                    <p className="gray">altura = {altura} y ancho = {ancho}</p>
+                    <p> Ayuda al circulo a llevar al cuadrado amarillo</p>
                     {LABERINTO && <MostrarLaberinto laberinto={LABERINTO} altura={altura} ancho={ancho} turno={LABF} />}
                 </div>
             </div>

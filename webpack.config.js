@@ -36,6 +36,20 @@ module.exports = (env, argv) => {
                     test: /\.css$/,
                     use: ['style-loader', 'css-loader']
                 },
+                {
+                    test: /\.svg$/,
+                    use: [
+                        {
+                            loader: "babel-loader"
+                        },
+                        {
+                            loader: "react-svg-loader",
+                            options: {
+                                jsx: true
+                            }
+                        }
+                    ]
+                },
             ]
         },
     }

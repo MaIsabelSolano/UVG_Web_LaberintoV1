@@ -4,20 +4,19 @@ const MostrarLaberinto = ({laberinto, altura, ancho, turno}) => {
     const height = parseInt(altura, 10) * 2 + 1
 
     const Movimiento = () => {
-        const mov = Event.key.toLowerCase()
+        const mov = event.key.toLowerCase()
 
         if (mov === 'arrowright' || mov === 'd' ) {
             turno((maze) => {
                 const lab = [...maze]
-                const y = lab.findIndex((fila) => fila.indexOF('p') > -1)
+                const y = lab.findIndex((fila) => fila.indexOf('p') > -1)
                 const x = lab[y].findIndex((columna) => columna === 'p')
 
-                const pos = lab[y][x+1]
 
-                if (pos === '+' || pos === '|'){
+                if (lab[y][x+1] === '+' || lab[y][x+1] === '|'){
                     //choque, no hacer nada
                 }
-                else if (pos === 'g') {
+                else if (lab[y][x+1] === 'g') {
                     lab[y][x] === ' '
                     lab[y][x + 1] = 'p'
                     alert('Fin del juego')
@@ -35,15 +34,13 @@ const MostrarLaberinto = ({laberinto, altura, ancho, turno}) => {
         else if(mov === 'arrowleft' || mov === 'a'){
             turno((maze) => {
                 const lab = [...maze]
-                const y = lab.findIndex((fila) => fila.indexOF('p') > -1)
+                const y = lab.findIndex((fila) => fila.indexOf('p') > -1)
                 const x = lab[y].findIndex((columna) => columna === 'p')
 
-                const pos = lab[y][x-1]
-
-                if (pos === '+' || pos === '|'){
+                if (lab[y][x-1] === '+' || lab[y][x-1] === '|'){
                     //choque, no hacer nada
                 }
-                else if (pos === 'g') {
+                else if (lab[y][x-1] === 'g') {
                     lab[y][x] === ' '
                     lab[y][x - 1] = 'p'
                     alert('Fin del juego')
@@ -61,15 +58,13 @@ const MostrarLaberinto = ({laberinto, altura, ancho, turno}) => {
         else if(mov === 'arrowup' || mov === 'w'){
             turno((maze) => {
                 const lab = [...maze]
-                const y = lab.findIndex((fila) => fila.indexOF('p') > -1)
+                const y = lab.findIndex((fila) => fila.indexOf('p') > -1)
                 const x = lab[y].findIndex((columna) => columna === 'p')
 
-                const pos = lab[y-1][x]
-
-                if (pos === '+' || pos === '-'){
+                if (lab[y-1][x] === '+' || lab[y-1][x] === '-'){
                     //choque, no hacer nada
                 }
-                else if (pos === 'g') {
+                else if (lab[y-1][x] === 'g') {
                     lab[y][x] === ' '
                     lab[y-1][x] = 'p'
                     alert('Fin del juego')
@@ -83,18 +78,16 @@ const MostrarLaberinto = ({laberinto, altura, ancho, turno}) => {
                 return lab
             })
         }
-        else if(mov === 'arrodown' || mov === 's'){
+        else if(mov === 'arrowdown' || mov === 's'){
             turno((maze) => {
                 const lab = [...maze]
-                const y = lab.findIndex((fila) => fila.indexOF('p') > -1)
+                const y = lab.findIndex((fila) => fila.indexOf('p') > -1)
                 const x = lab[y].findIndex((columna) => columna === 'p')
 
-                const pos = lab[y+1][x]
-
-                if (pos === '+' || pos === '-'){
+                if (lab[y+1][x] === '+' || lab[y+1][x] === '-'){
                     //choque, no hacer nada
                 }
-                else if (pos === 'g') {
+                else if (lab[y+1][x] === 'g') {
                     lab[y][x] === ' '
                     lab[y+1][x] = 'p'
                     alert('Fin del juego')
@@ -108,13 +101,12 @@ const MostrarLaberinto = ({laberinto, altura, ancho, turno}) => {
                 return lab
             })
         }
-
     }
 
-    Window.onkeydown = Movimiento
+    window.onkeydown = Movimiento
 
     return (
-        <div id="gridLaberinto">
+        <div id="gridLaberinto" data-column={width} data-row={height}>
             { laberinto.map((fila, llave1) => fila.map((parte, llave2) => {
                 if (parte === '+' || parte === '|' || parte === '-'){
                     return <div key={(llave1 * 5 + llave2 + 2).toString()} className='pared'>{parte}</div>
